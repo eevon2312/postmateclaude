@@ -1,0 +1,16 @@
+{
+  "buildCommand": "prisma generate && next build",
+  "env": {
+    "DATABASE_URL": "@database_url",
+    "NEXTAUTH_URL": "@nextauth_url",
+    "NEXTAUTH_SECRET": "@nextauth_secret",
+    "GOOGLE_CLIENT_ID": "@google_client_id",
+    "GOOGLE_CLIENT_SECRET": "@google_client_secret",
+    "STRIPE_SECRET_KEY": "@stripe_secret_key",
+    "STRIPE_PUBLISHABLE_KEY": "@stripe_publishable_key",
+    "STRIPE_WEBHOOK_SECRET": "@stripe_webhook_secret",
+    "POSTGRID_API_KEY": "@postgrid_api_key",
+    "POSTGRID_WEBHOOK_SECRET": "@postgrid_webhook_secret",
+    "NEXT_PUBLIC_APP_URL": "@next_public_app_url"
+  }
+}
