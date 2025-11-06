@@ -45,12 +45,16 @@ async function main() {
     },
   ]
 
-  for (const template of templates) {
-    await prisma.template.upsert({
-      where: { name: template.name },
-      update: {},
-      create: template,
+  // Check if templates already exist
+  const existingCount = await prisma.template.count()
+
+  if (existingCount === 0) {
+    await prisma.template.createMany({
+      data: templates,
     })
+    console.log(`✅ Created ${templates.length} templates!`)
+  } else {
+    console.log(`✅ Database already has ${existingCount} templates. Skipping seed.`)
   }
 
   console.log('✅ Database seeded successfully!')

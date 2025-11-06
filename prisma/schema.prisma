@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -33,12 +33,12 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -86,7 +86,7 @@ model Postcard {
   userId           String?
   templateId       String
   imageUrl         String?
-  messageText      String    @db.Text
+  messageText      String
   handwritingFont  String    @default("Caveat")
   status           String    @default("draft") // draft, processing, sent, delivered, failed
   trackingId       String?   @unique
@@ -94,7 +94,7 @@ model Postcard {
 
   // Recipient details
   recipientName    String
-  recipientAddress String    @db.Text
+  recipientAddress String
   recipientCity    String
   recipientState   String?
   recipientZip     String
@@ -134,7 +134,7 @@ model Reply {
   id          String   @id @default(cuid())
   postcardId  String
   senderName  String?
-  message     String   @db.Text
+  message     String
   createdAt   DateTime @default(now())
 
   postcard    Postcard @relation(fields: [postcardId], references: [id], onDelete: Cascade)
